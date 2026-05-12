@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RetailDost - India's Smartest POS for Kirana & Retail Shops. Offline-first billing, Khata ledger, inventory management.">
+    <meta name="theme-color" content="#1E293B">
+    <title>RetailDost - POS System for Indian Retailers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-navy: #1E293B;
+            --primary-dark: #0F172A;
+            --accent-blue: #007AFF;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --bg-light: #F8FAFC;
+            --surface-white: #FFFFFF;
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --border-light: #E2E8F0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+        }
+
+        header {
+            background-color: var(--surface-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--primary-navy);
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .cta-button {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #0056d9;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 5rem 1.5rem;
+            text-align: center;
+        }
+
+        .hero .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            margin-bottom: 0.5rem;
+            color: #E2E8F0;
+        }
+
+        .hero .sub-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-bottom: 2rem;
+            color: #CBD5E1;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .play-store-btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary-navy);
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .play-store-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-visual {
+            margin-top: 3rem;
+            font-size: 4rem;
+            opacity: 0.15;
+        }
+
+        section {
+            padding: 4rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-navy);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary-navy);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .personas {
+            background: var(--surface-white);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid var(--accent-blue);
+        }
+
+        .personas h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .personas-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .persona-tag {
+            background: var(--bg-light);
+            color: var(--primary-navy);
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border: 1px solid var(--border-light);
+        }
+
+        .cta-banner {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0056d9 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem;
+            border-radius: 0.75rem;
+            margin: 3rem 0 0 0;
+        }
+
+        .cta-banner h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .cta-banner p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        footer {
+            background-color: var(--primary-navy);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            border-top: 1px solid var(--primary-dark);
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #CBD5E1;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer-copyright {
+            color: #94A3B8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.75rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .play-store-btn, .cta-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 0.95rem;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo-section">
+                <svg class="logo-img" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- OruShops Logo simplified -->
+                    <circle cx="50" cy="100" r="40" fill="none" stroke="#0F172A" stroke-width="8"/>
+                    <path d="M 40 100 Q 50 80 60 100" fill="none" stroke="#D4AF37" stroke-width="6" stroke-linecap="round"/>
+                    <text x="110" y="120" font-family="Inter" font-size="48" font-weight="700" fill="#0F172A">O</text>
+                </svg>
+                <span class="logo-text">RetailDost</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#for-whom">For Whom</a>
+                <a href="#download">Download</a>
+                <a href="privacy_policy.html" target="_blank">Privacy</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>India's Smartest POS for Kirana & Retail Shops</h1>
+            <p class="subtitle">RetailDost</p>
+            <p class="sub-subtitle">Offline-first billing • Khata ledger • Inventory management</p>
+            <div class="hero-buttons">
+                <a href="#" class="play-store-btn" onclick="alert('Play Store link coming soon! Stay tuned.'); return false;">
+                    📱 Get it on Google Play
+                </a>
+            </div>
+            <div class="hero-visual">📊</div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <h2>Powerful Features for Your Shop</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧾</div>
+                    <h3>Fast Billing</h3>
+                    <p>Scan barcodes, build cart, and print receipts in seconds. Process transactions faster than ever.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📒</div>
+                    <h3>Khata (Credit Book)</h3>
+                    <p>Track customer credit and payments like a digital ledger. Never lose track of who owes what.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Inventory Management</h3>
+                    <p>Low stock alerts, expiry tracking, and batch management. Keep your inventory organized.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Analytics & Insights</h3>
+                    <p>Daily and weekly sales charts, top products, and business performance at a glance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Offline-First</h3>
+                    <p>Works without internet. Your data stays safe locally on your device.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <h3>Cloud Backup</h3>
+                    <p>Sync and backup your data securely to the cloud. Never worry about losing your data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Whom Section -->
+    <section id="for-whom">
+        <div class="container">
+            <h2>Built for Indian Retailers</h2>
+            <div class="personas">
+                <h3>Perfect for Your Business</h3>
+                <div class="personas-list">
+                    <span class="persona-tag">🛒 Kirana Stores</span>
+                    <span class="persona-tag">🥬 Grocery Shops</span>
+                    <span class="persona-tag">💊 Pharmacies</span>
+                    <span class="persona-tag">👕 Clothing Stores</span>
+                    <span class="persona-tag">⚡ Electronics Shops</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section id="download" class="cta-banner-section">
+        <div class="container">
+            <div class="cta-banner">
+                <h2>Ready to Transform Your Shop?</h2>
+                <p>Download RetailDost today and experience smarter POS management.</p>
+                <a href="#" class="play-store-btn" onclick="alert('Play Store link coming soon! Stay tuned.'); return false;">
+                    📱 Get it on Google Play
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="privacy_policy.html" target="_blank">Privacy Policy</a>
+                <a href="terms_of_service.html" target="_blank">Terms of Service</a>
+                <a href="mailto:easyio.tech@gmail.com">Contact Us</a>
+            </div>
+            <p class="footer-copyright">© 2026 OruShops. All rights reserved. | RetailDost - Retail POS System</p>
+        </div>
+    </footer>
+</body>
+</html>
