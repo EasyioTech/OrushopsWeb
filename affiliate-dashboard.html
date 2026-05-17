@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OruShops Affiliate Dashboard - Earn with OruShops">
+    <meta name="theme-color" content="#FFFFFF">
+    <title>Affiliate Dashboard - OruShops</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand': {
+                            'bg': '#FFFFFF',
+                            'surface': '#F9FAFB',
+                            'surface-2': '#F3F4F6',
+                            'primary': '#2563EB',
+                            'primary-hover': '#1D4ED8',
+                            'accent': '#0EA5E9',
+                            'text': '#1F2937',
+                            'muted': '#6B7280',
+                        }
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'system-ui', 'sans-serif'],
+                        'plus': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                        'geist': ['Geist', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide@latest/css/lucide.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #FFFFFF; color: #1F2937; }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: #FFFFFF;
+            border-right: 1px solid #E5E7EB;
+            overflow-y: auto;
+            z-index: 40;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 28px;
+            min-height: 100vh;
+            background: #FFFFFF;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            margin: 4px 12px;
+            border-radius: 8px;
+            color: #6B7280;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 200ms;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: #F9FAFB;
+            color: #1F2937;
+        }
+
+        .nav-item.active {
+            background: #2563EB;
+            color: white;
+        }
+
+        .card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 200ms;
+        }
+
+        .card:hover {
+            border-color: #D1D5DB;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .metric-card {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1F2937;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        }
+
+        .metric-change {
+            font-size: 12px;
+            margin-top: 8px;
+            color: #2563EB;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 200ms;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .btn-primary {
+            background: #2563EB;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1D4ED8;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-secondary {
+            background: #F3F4F6;
+            color: #1F2937;
+        }
+
+        .btn-secondary:hover {
+            background: #E5E7EB;
+        }
+
+        .btn-outline {
+            border: 1px solid #D1D5DB;
+            background: transparent;
+            color: #1F2937;
+        }
+
+        .btn-outline:hover {
+            background: #F9FAFB;
+            border-color: #2563EB;
+        }
+
+        .referral-code-box {
+            background: #2563EB;
+            padding: 24px;
+            border-radius: 12px;
+            color: white;
+            text-align: center;
+        }
+
+        .referral-code {
+            font-size: 32px;
+            font-weight: 800;
+            font-family: 'Courier New', monospace;
+            margin: 16px 0;
+            letter-spacing: 2px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-bronze { background: #92400E; color: #FEF3C7; }
+        .badge-silver { background: #374151; color: #F3F4F6; }
+        .badge-gold { background: #B45309; color: #FEF3C7; }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #F3F4F6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #2563EB;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .status-pending { background: #F59E0B; color: #1F2937; }
+        .status-processing { background: #0EA5E9; color: white; }
+        .status-paid { background: #10B981; color: white; }
+        .status-failed { background: #EF4444; color: white; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 50;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #E5E7EB;
+            font-weight: 600;
+            font-size: 12px;
+            color: #6B7280;
+            text-transform: uppercase;
+            background: #F9FAFB;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid #E5E7EB;
+            font-size: 14px;
+            color: #1F2937;
+        }
+
+        .table tr:hover {
+            background: #F9FAFB;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .share-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 200ms;
+        }
+
+        .share-whatsapp { background: #25D366; color: white; }
+        .share-telegram { background: #0088CC; color: white; }
+        .share-email { background: #EA4335; color: white; }
+        .share-copy { background: #6B7280; color: white; }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #E5E7EB;
+            color: #1F2937;
+            border-radius: 6px;
+            font-size: 12px;
+            margin: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                transform: translateX(-100%);
+                transition: transform 300ms;
+            }
+
+            .sidebar.open {
+                width: 260px;
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 16px;
+            }
+
+            .metric-value {
+                font-size: 24px;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
+            border-radius: 999px;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        .input-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6B7280;
+            flex-shrink: 0;
+        }
+
+        .input-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .input-wrapper input, .input-wrapper select, .input-wrapper textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background: transparent;
+            border: none;
+            color: #1F2937;
+            font-size: 14px;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .input-wrapper input:focus, .input-wrapper select:focus, .input-wrapper textarea:focus {
+            outline: none;
+        }
+
+        .input-wrapper:has(input:focus), .input-wrapper:has(select:focus), .input-wrapper:has(textarea:focus) {
+            border-color: #2563EB;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .input-wrapper input::placeholder, .input-wrapper textarea::placeholder {
+            color: #BDBDBD;
+        }
+
+        .input-wrapper select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 32px;
+        }
+
+        .fade-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div style="padding: 20px;">
+            <h2 style="font-size: 20px; font-weight: 700; color: #1F2937; margin-bottom: 8px;">OruShops</h2>
+            <p style="font-size: 12px; color: #6B7280;">Affiliate Hub</p>
+        </div>
+
+        <nav style="margin-top: 24px;">
+            <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
+                </svg>
+                Dashboard
+            </a>
+            <a href="#referrals" class="nav-item" data-section="referrals">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                My Referrals
+            </a>
+            <a href="#payouts" class="nav-item" data-section="payouts">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                    <path d="M2 10h20"></path>
+                </svg>
+                Payouts
+            </a>
+            <a href="#analytics" class="nav-item" data-section="analytics">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+                Analytics
+            </a>
+            <a href="#resources" class="nav-item" data-section="resources">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Marketing Kit
+            </a>
+            <a href="#leaderboard" class="nav-item" data-section="leaderboard">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="8 7 4 11 8 15"></polyline>
+                    <polyline points="16 7 20 11 16 15"></polyline>
+                    <line x1="9" y1="4" x2="15" y2="4"></line>
+                    <line x1="9" y1="20" x2="15" y2="20"></line>
+                </svg>
+                Leaderboard
+            </a>
+        </nav>
+
+        <div style="position: absolute; bottom: 20px; left: 0; right: 0; padding: 0 16px; border-top: 1px solid #334155; padding-top: 16px;">
+            <button class="btn btn-outline" style="width: 100%; justify-content: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <div style="display: none; position: fixed; top: 16px; left: 16px; z-index: 30;" id="mobileMenuBtn">
+        <button style="background: #1E293B; border: 1px solid #E5E7EB; border-radius: 8px; padding: 8px; cursor: pointer;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E2E8F0" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="section">
+            <!-- Welcome Header -->
+            <div style="margin-bottom: 32px;">
+                <h1 style="font-size: 32px; font-weight: 700; color: #1F2937; margin-bottom: 8px;">Welcome back, Burhan 👋</h1>
+                <p style="color: #6B7280; font-size: 15px;">Your affiliate earnings dashboard. Real-time stats, fast payouts.</p>
+            </div>
+
+            <!-- Referral Code Card -->
+            <div class="referral-code-box" style="margin-bottom: 32px;">
+                <p style="font-size: 13px; opacity: 0.9;">Your Unique Referral Code</p>
+                <div class="referral-code" id="referralCode">BURHAN123</div>
+                <p style="font-size: 12px; opacity: 0.85; margin-bottom: 16px;">orushops.com/ref/BURHAN123</p>
+                <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                    <button class="share-btn share-whatsapp" onclick="shareWhatsApp();" title="Share on WhatsApp">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.944 1.262c-1.526.798-2.793 1.881-3.702 3.23-1.608 2.323-1.845 5.206-.501 7.7 1.032 1.868 2.607 3.323 4.627 4.164 1.614.67 3.386.826 5.134.476 1.667-.327 3.24-1.143 4.46-2.44l.062-.061.03-.03.013-.014a9.866 9.866 0 001.733-5.32c.022-.503.054-1.006-.003-1.51-.118-1.004-.443-1.92-1.009-2.75-.952-1.399-2.413-2.356-4.045-2.707-.868-.192-1.81-.189-2.725.09zm11.772-5.283c-1.585-1.595-3.718-2.447-5.957-2.457-2.239-.01-4.375.83-5.965 2.417-1.589 1.587-2.468 3.721-2.468 5.96-.002 1.268.183 2.522.546 3.73h-.003l-.001.002-1.445 5.27c-.155.565.088 1.168.628 1.377.54.209 1.158.065 1.52-.4l4.052-5.218c1.132.294 2.304.47 3.553.47 2.238 0 4.372-.848 5.96-2.436 1.59-1.587 2.467-3.721 2.469-5.96-.001-2.239-.878-4.373-2.468-5.961"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn share-telegram" onclick="shareTelegram();" title="Share on Telegram">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.869 4.32-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.461c.54-.202 1.01.122.84.953z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn share-email" onclick="shareEmail();" title="Share via Email">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                        </svg>
+                    </button>
+                    <button class="share-btn share-copy" onclick="copyCode();" id="copyBtn" title="Copy Code">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="21 15 6 15 6 3 21 3 21 15"></polyline>
+                            <polyline points="18 8 18 21 3 21 3 8"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Key Metrics Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 32px;" class="grid-2">
+                <div class="metric-card">
+                    <div class="metric-label">Total Earnings</div>
+                    <div class="metric-value">₹45,320</div>
+                    <div class="metric-change">↑ 12.5% from last month</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Pending Payout</div>
+                    <div class="metric-value">₹8,450</div>
+                    <div class="metric-change">Minimum to withdraw: ₹1000</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Total Clicks</div>
+                    <div class="metric-value">3,847</div>
+                    <div class="metric-change">↑ 28% conversion rate</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Total Referrals</div>
+                    <div class="metric-value">156</div>
+                    <div class="metric-change">↑ 18 this month</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Affiliate Level</div>
+                    <div style="margin-top: 8px;">
+                        <span class="badge badge-gold">Gold Partner</span>
+                        <div class="metric-change" style="margin-top: 8px;">₹50k earnings to Platinum</div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Earned This Month</div>
+                    <div class="metric-value">₹12,890</div>
+                    <div class="metric-change">7 days left in month</div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="openWithdrawModal();">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14"></path>
+                        <path d="M19 12l-7 7-7-7"></path>
+                    </svg>
+                    Withdraw Earnings
+                </button>
+                <button class="btn btn-outline" onclick="openQRModal();">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    View QR Code
+                </button>
+                <a href="#resources" class="btn btn-outline" onclick="switchSection('resources');">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Download Creatives
+                </a>
+            </div>
+
+            <!-- Two Column Layout -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;" class="grid-2">
+                <!-- Recent Activity -->
+                <div class="card">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Recent Activity</h3>
+                    <div id="activityFeed">
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background: linear-gradient(135deg, #10B981 0%, #06B6D4 100%);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M12 5v14"></path>
+                                    <path d="M19 12l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <p style="color: #1F2937; font-weight: 500; font-size: 14px;">Payment Received</p>
+                                <p style="color: #6B7280; font-size: 12px;">₹2,500 from Rajesh Kumar</p>
+                            </div>
+                            <p style="color: #6B7280; font-size: 12px;">2 hours ago</p>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background: #F59E0B;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <circle cx="12" cy="12" r="1"></circle>
+                                    <path d="M12 1v6"></path>
+                                    <path d="M12 17v6"></path>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <p style="color: #1F2937; font-weight: 500; font-size: 14px;">New Referral</p>
+                                <p style="color: #6B7280; font-size: 12px;">Priya Singh joined OruShops</p>
+                            </div>
+                            <p style="color: #6B7280; font-size: 12px;">5 hours ago</p>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background: #06B6D4;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M12 5v14"></path>
+                                    <path d="M19 12l-7-7-7 7"></path>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <p style="color: #1F2937; font-weight: 500; font-size: 14px;">Payout Processed</p>
+                                <p style="color: #6B7280; font-size: 12px;">₹5,200 to your account</p>
+                            </div>
+                            <p style="color: #6B7280; font-size: 12px;">1 day ago</p>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background: #10B981;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M12 1v6"></path>
+                                    <path d="M12 17v6"></path>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <p style="color: #1F2937; font-weight: 500; font-size: 14px;">Referral Link Clicked</p>
+                                <p style="color: #6B7280; font-size: 12px;">342 clicks this month</p>
+                            </div>
+                            <p style="color: #6B7280; font-size: 12px;">3 days ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="card">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Quick Stats</h3>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 4px;">Conversion Rate</p>
+                            <div style="background: #334155; border-radius: 6px; height: 8px;">
+                                <div style="background: linear-gradient(90deg, #10B981 0%, #06B6D4 100%); height: 100%; width: 72%; border-radius: 6px;"></div>
+                            </div>
+                            <p style="font-size: 12px; color: #1F2937; margin-top: 4px; font-weight: 600;">7.2%</p>
+                        </div>
+
+                        <div>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 4px;">Avg Commission</p>
+                            <p style="font-size: 18px; color: #1F2937; font-weight: 700;">₹289</p>
+                            <p style="font-size: 11px; color: #6B7280;">per referral</p>
+                        </div>
+
+                        <div>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 4px;">Performance</p>
+                            <div style="display: flex; gap: 4px;">
+                                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
+                                <span style="font-size: 12px; color: #1F2937;">Above Average</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Referrals Section -->
+        <section id="referrals-section" class="section fade-in" style="display: none;">
+            <h1 style="font-size: 32px; font-weight: 700; color: #1F2937; margin-bottom: 24px;">My Referrals</h1>
+
+            <div class="card" style="margin-bottom: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #1F2937;">All Referrals (156 total)</h3>
+                    <div class="input-wrapper" style="width: 200px;">
+                        <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg></span>
+                        <input type="text" placeholder="Search referrals...">
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Shop Type</th>
+                            <th>Joined</th>
+                            <th>Commission</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: #1F2937; font-weight: 500;">Rajesh Kumar</td>
+                            <td style="color: #6B7280;">Kirana Store</td>
+                            <td style="color: #6B7280;">15 Jan 2026</td>
+                            <td style="color: #10B981; font-weight: 600;">₹2,450</td>
+                            <td><span class="status-badge status-paid">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td style="color: #1F2937; font-weight: 500;">Priya Singh</td>
+                            <td style="color: #6B7280;">Apparel Shop</td>
+                            <td style="color: #6B7280;">12 Feb 2026</td>
+                            <td style="color: #10B981; font-weight: 600;">₹1,890</td>
+                            <td><span class="status-badge status-paid">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td style="color: #1F2937; font-weight: 500;">Amit Patel</td>
+                            <td style="color: #6B7280;">Electronics</td>
+                            <td style="color: #6B7280;">8 Mar 2026</td>
+                            <td style="color: #F59E0B; font-weight: 600;">₹567</td>
+                            <td><span class="status-badge status-processing">Processing</span></td>
+                        </tr>
+                        <tr>
+                            <td style="color: #1F2937; font-weight: 500;">Deepa Nair</td>
+                            <td style="color: #6B7280;">Beauty & Health</td>
+                            <td style="color: #6B7280;">20 Apr 2026</td>
+                            <td style="color: #6B7280;">₹0</td>
+                            <td><span class="status-badge status-pending">Trial</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Payouts Section -->
+        <section id="payouts-section" class="section fade-in" style="display: none;">
+            <h1 style="font-size: 32px; font-weight: 700; color: #1F2937; margin-bottom: 24px;">Payouts & Withdrawals</h1>
+
+            <!-- Payout Stats -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 32px;" class="grid-2">
+                <div class="metric-card">
+                    <div class="metric-label">Available to Withdraw</div>
+                    <div class="metric-value">₹8,450</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Total Paid Out</div>
+                    <div class="metric-value">₹36,870</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Processing</div>
+                    <div class="metric-value">₹2,500</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Minimum Withdrawal</div>
+                    <div class="metric-value">₹1,000</div>
+                </div>
+            </div>
+
+            <!-- Withdraw Button -->
+            <div class="card" style="margin-bottom: 24px;">
+                <h3 style="font-size: 16px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Withdraw Earnings</h3>
+                <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <div class="input-wrapper" style="width: 200px;">
+                        <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><circle cx="12" cy="12" r="1"></circle><path d="M12 1v6m0 6v6"></path><path d="M4.22 4.22l4.24 4.24m5.08 0l4.24-4.24M4.22 19.78l4.24-4.24m5.08 0l4.24 4.24"></path></svg></span>
+                        <input type="number" id="withdrawAmount" placeholder="Enter amount (₹)" min="1000">
+                    </div>
+                    <button class="btn btn-primary" onclick="processWithdraw();">
+                        Withdraw to UPI
+                    </button>
+                    <p style="color: #6B7280; font-size: 12px;">Instant to your registered UPI</p>
+                </div>
+            </div>
+
+            <!-- Payout History -->
+            <div class="card">
+                <h3 style="font-size: 16px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Payout History</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Method</th>
+                            <th>Status</th>
+                            <th>Reference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: #6B7280;">15 May 2026</td>
+                            <td style="color: #1F2937; font-weight: 600;">₹5,200</td>
+                            <td style="color: #6B7280;">UPI</td>
+                            <td><span class="status-badge status-paid">Paid</span></td>
+                            <td style="color: #6B7280; font-family: monospace;">TXN2026051501</td>
+                        </tr>
+                        <tr>
+                            <td style="color: #6B7280;">1 May 2026</td>
+                            <td style="color: #1F2937; font-weight: 600;">₹4,100</td>
+                            <td style="color: #6B7280;">Bank Transfer</td>
+                            <td><span class="status-badge status-paid">Paid</span></td>
+                            <td style="color: #6B7280; font-family: monospace;">TXN2026050101</td>
+                        </tr>
+                        <tr>
+                            <td style="color: #6B7280;">12 Apr 2026</td>
+                            <td style="color: #1F2937; font-weight: 600;">₹3,600</td>
+                            <td style="color: #6B7280;">UPI</td>
+                            <td><span class="status-badge status-paid">Paid</span></td>
+                            <td style="color: #6B7280; font-family: monospace;">TXN2026041201</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics-section" class="section fade-in" style="display: none;">
+            <h1 style="font-size: 32px; font-weight: 700; color: #1F2937; margin-bottom: 24px;">Analytics & Performance</h1>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;" class="grid-2">
+                <!-- Earnings Chart -->
+                <div class="card">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Monthly Earnings</h3>
+                    <div class="chart-container">
+                        <canvas id="earningsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Clicks Chart -->
+                <div class="card">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Referral Clicks</h3>
+                    <div class="chart-container">
+                        <canvas id="clicksChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Conversion Chart -->
+                <div class="card">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Conversion Rate Trend</h3>
+                    <div class="chart-container">
+                        <canvas id="conversionChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Payout Chart -->
+                <div class="card">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Payout Distribution</h3>
+                    <div class="chart-container">
+                        <canvas id="payoutChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources-section" class="section fade-in" style="display: none;">
+            <h1 style="font-size: 32px; font-weight: 700; color: #1F2937; margin-bottom: 24px;">Marketing Kit</h1>
+            <p style="color: #6B7280; margin-bottom: 24px;">Download high-quality creatives to promote OruShops affiliate program</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                <!-- Banner -->
+                <div class="card">
+                    <div style="background: linear-gradient(135deg, #10B981 0%, #06B6D4 100%); height: 160px; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center;">
+                        <p style="color: white; font-weight: 700; text-align: center;">3000 x 600px<br>Web Banner</p>
+                    </div>
+                    <h4 style="color: #1F2937; font-weight: 600; margin-bottom: 8px;">Web Banner</h4>
+                    <p style="color: #6B7280; font-size: 13px; margin-bottom: 12px;">Perfect for blogs and websites</p>
+                    <button class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download PNG
+                    </button>
+                </div>
+
+                <!-- Social Media Post -->
+                <div class="card">
+                    <div style="background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%); height: 160px; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center;">
+                        <p style="color: white; font-weight: 700; text-align: center;">1080 x 1080px<br>Instagram Post</p>
+                    </div>
+                    <h4 style="color: #1F2937; font-weight: 600; margin-bottom: 8px;">Instagram Post</h4>
+                    <p style="color: #6B7280; font-size: 13px; margin-bottom: 12px;">Ready for Instagram feed</p>
+                    <button class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download PNG
+                    </button>
+                </div>
+
+                <!-- WhatsApp Status -->
+                <div class="card">
+                    <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); height: 160px; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center;">
+                        <p style="color: white; font-weight: 700; text-align: center;">1080 x 1920px<br>WhatsApp Status</p>
+                    </div>
+                    <h4 style="color: #1F2937; font-weight: 600; margin-bottom: 8px;">WhatsApp Status</h4>
+                    <p style="color: #6B7280; font-size: 13px; margin-bottom: 12px;">Share in WhatsApp stories</p>
+                    <button class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download MP4
+                    </button>
+                </div>
+
+                <!-- Poster -->
+                <div class="card">
+                    <div style="background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%); height: 160px; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center;">
+                        <p style="color: white; font-weight: 700; text-align: center;">1200 x 1600px<br>Poster (A5)</p>
+                    </div>
+                    <h4 style="color: #1F2937; font-weight: 600; margin-bottom: 8px;">Printable Poster</h4>
+                    <p style="color: #6B7280; font-size: 13px; margin-bottom: 12px;">Print and hang in your shop</p>
+                    <button class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download PDF
+                    </button>
+                </div>
+
+                <!-- Email Template -->
+                <div class="card">
+                    <div style="background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%); height: 160px; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center;">
+                        <p style="color: white; font-weight: 700; text-align: center;">Email<br>Template HTML</p>
+                    </div>
+                    <h4 style="color: #1F2937; font-weight: 600; margin-bottom: 8px;">Email Template</h4>
+                    <p style="color: #6B7280; font-size: 13px; margin-bottom: 12px;">Ready to send campaigns</p>
+                    <button class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download ZIP
+                    </button>
+                </div>
+
+                <!-- Script Copy -->
+                <div class="card">
+                    <div style="background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); height: 160px; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center;">
+                        <p style="color: white; font-weight: 700; text-align: center;">Copy-Paste<br>Scripts & Captions</p>
+                    </div>
+                    <h4 style="color: #1F2937; font-weight: 600; margin-bottom: 8px;">Promo Scripts</h4>
+                    <p style="color: #6B7280; font-size: 13px; margin-bottom: 12px;">Ready-made messaging</p>
+                    <button class="btn btn-secondary" style="width: 100%; justify-content: center;" onclick="viewScripts();">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="21 15 6 15 6 3 21 3 21 15"></polyline>
+                            <polyline points="18 8 18 21 3 21 3 8"></polyline>
+                        </svg>
+                        View Scripts
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard Section -->
+        <section id="leaderboard-section" class="section fade-in" style="display: none;">
+            <h1 style="font-size: 32px; font-weight: 700; color: #1F2937; margin-bottom: 24px;">Top Performers</h1>
+
+            <div class="card">
+                <h3 style="font-size: 16px; font-weight: 700; color: #1F2937; margin-bottom: 20px;">Leaderboard - This Month</h3>
+
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 16px; background: linear-gradient(90deg, #F59E0B 0%, #F59E0B 10%, transparent 100%); border-radius: 8px;">
+                        <div style="font-size: 24px; font-weight: 700; color: #F59E0B; min-width: 40px;">🥇</div>
+                        <div style="flex: 1;">
+                            <p style="color: #1F2937; font-weight: 600;">Amit Sharma</p>
+                            <p style="color: #6B7280; font-size: 13px;">152 referrals • ₹18,450 earned</p>
+                        </div>
+                        <span class="badge badge-gold">Gold Partner</span>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 16px; background: linear-gradient(90deg, #C0C0C0 0%, #C0C0C0 10%, transparent 100%); border-radius: 8px;">
+                        <div style="font-size: 24px; font-weight: 700; color: #C0C0C0; min-width: 40px;">🥈</div>
+                        <div style="flex: 1;">
+                            <p style="color: #1F2937; font-weight: 600;">Priya Verma</p>
+                            <p style="color: #6B7280; font-size: 13px;">128 referrals • ₹15,200 earned</p>
+                        </div>
+                        <span class="badge badge-silver">Silver Partner</span>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 16px; background: linear-gradient(90deg, #CD7F32 0%, #CD7F32 10%, transparent 100%); border-radius: 8px;">
+                        <div style="font-size: 24px; font-weight: 700; color: #CD7F32; min-width: 40px;">🥉</div>
+                        <div style="flex: 1;">
+                            <p style="color: #1F2937; font-weight: 600;">Rajesh Kumar</p>
+                            <p style="color: #6B7280; font-size: 13px;">98 referrals • ₹11,700 earned</p>
+                        </div>
+                        <span class="badge badge-bronze">Bronze Partner</span>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 16px; border-top: 1px solid #334155;">
+                        <div style="font-size: 24px; font-weight: 700; color: #06B6D4; min-width: 40px;">4️⃣</div>
+                        <div style="flex: 1;">
+                            <p style="color: #1F2937; font-weight: 600;">Burhan Ali (You)</p>
+                            <p style="color: #6B7280; font-size: 13px;">156 referrals • ₹45,320 earned</p>
+                        </div>
+                        <span class="badge badge-gold">Gold Partner</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    <!-- Withdraw Modal -->
+    <div class="modal" id="withdrawModal">
+        <div class="modal-content" style="padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="font-size: 20px; font-weight: 700; color: #1F2937;">Withdraw Earnings</h2>
+                <button onclick="closeWithdrawModal();" style="background: none; border: none; cursor: pointer; color: #6B7280;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div style="background: #F3F4F6; padding: 16px; border-radius: 8px; margin-bottom: 20px;">
+                <p style="font-size: 12px; color: #6B7280; margin-bottom: 4px;">Available to Withdraw</p>
+                <p style="font-size: 28px; color: #10B981; font-weight: 700;">₹8,450</p>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+                <label style="display: block; color: #1F2937; font-size: 14px; font-weight: 600; margin-bottom: 8px;">Amount</label>
+                <div class="input-wrapper">
+                    <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><circle cx="12" cy="12" r="1"></circle><path d="M12 1v6m0 6v6"></path><path d="M4.22 4.22l4.24 4.24m5.08 0l4.24-4.24M4.22 19.78l4.24-4.24m5.08 0l4.24 4.24"></path></svg></span>
+                    <input type="number" id="withdrawAmountModal" placeholder="Enter amount (₹)" min="1000" max="8450">
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; color: #1F2937; font-size: 14px; font-weight: 600; margin-bottom: 8px;">Withdraw Method</label>
+                <div class="input-wrapper">
+                    <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><rect x="1" y="4" width="22" height="16" rx="2"></rect><path d="M1 10h22M1 14h22"></path></svg></span>
+                    <select>
+                        <option>UPI (instant)</option>
+                        <option>Bank Transfer (1-2 days)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="background: #F0F9FF; border-left: 4px solid #2563EB; padding: 12px; border-radius: 6px; margin-bottom: 20px;">
+                <p style="font-size: 12px; color: #1E40AF;"><strong>Note:</strong> Minimum withdrawal is ₹1,000. Funds arrive instantly via UPI.</p>
+            </div>
+
+            <div style="display: flex; gap: 12px;">
+                <button class="btn btn-secondary" style="flex: 1;" onclick="closeWithdrawModal();">Cancel</button>
+                <button class="btn btn-primary" style="flex: 1;" onclick="confirmWithdraw();">Confirm Withdrawal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content" style="padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="font-size: 20px; font-weight: 700; color: #1F2937;">Share Your Referral</h2>
+                <button onclick="closeQRModal();" style="background: none; border: none; cursor: pointer; color: #6B7280;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div id="qrcode" style="display: inline-block; background: white; padding: 12px; border-radius: 8px;"></div>
+            </div>
+
+            <div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 12px; border-radius: 6px; margin-bottom: 16px; text-align: center;">
+                <p style="color: #6B7280; font-size: 12px; margin-bottom: 4px;">Your Referral Link</p>
+                <p style="color: #1F2937; font-weight: 600; font-family: monospace; font-size: 13px;">orushops.com/ref/BURHAN123</p>
+            </div>
+
+            <div style="display: flex; gap: 8px;">
+                <button class="share-btn share-whatsapp" onclick="shareWhatsApp();" style="flex: 1;">WhatsApp</button>
+                <button class="share-btn share-copy" onclick="copyQRLink();" style="flex: 1;">Copy Link</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="affiliate-script.js"></script>
+</body>
+</html>
