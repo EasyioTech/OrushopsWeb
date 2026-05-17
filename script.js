@@ -1,26 +1,3 @@
-// ============= Theme Management =============
-class ThemeManager {
-    constructor() {
-        this.themeToggle = document.getElementById('theme-toggle');
-        this.body = document.body;
-        this.init();
-    }
-
-    init() {
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            this.body.classList.add('dark-mode');
-        }
-        this.themeToggle.addEventListener('click', () => this.toggle());
-    }
-
-    toggle() {
-        this.body.classList.toggle('dark-mode');
-        const isDarkMode = this.body.classList.contains('dark-mode');
-        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    }
-}
-
 // ============= Mobile Navigation =============
 class MobileNav {
     constructor() {
@@ -103,7 +80,6 @@ function initKeyboardNav() {
 
 // ============= Initialize on DOM Ready =============
 document.addEventListener('DOMContentLoaded', () => {
-    new ThemeManager();
     new MobileNav();
     new ScrollAnimations();
     initKeyboardNav();

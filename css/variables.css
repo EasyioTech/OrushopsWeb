@@ -7,10 +7,10 @@
   --surface-lighter: #374151;
 
   /* Brand Colors */
-  --primary: #6366f1;
-  --primary-light: #818cf8;
-  --secondary: #8b5cf6;
-  --accent: #06b6d4;
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
+  --secondary: #0ea5e9;
+  --accent: #0ea5e9;
 
   /* Semantic */
   --success: #10b981;
@@ -70,7 +70,7 @@
 
 /* Gradients */
 :root {
-  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
-  --gradient-secondary: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
-  --gradient-overlay: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+  --gradient-primary: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+  --gradient-secondary: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+  --gradient-overlay: radial-gradient(circle at top right, rgba(37, 99, 235, 0.08) 0%, transparent 50%);
 }

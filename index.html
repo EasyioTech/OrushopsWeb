@@ -3,421 +3,759 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RetailDost - India's Smartest POS for Kirana & Retail Shops. Offline-first billing, Khata ledger, inventory management.">
-    <meta name="theme-color" content="#1E293B">
-    <title>RetailDost - Smart POS for Indian Retailers</title>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=GeistMono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/sections.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <meta name="description" content="OruShops by OruStudio - India's Smartest POS for Kirana & Retail Shops. Offline-first billing, Khata ledger, inventory management. From Easyio Technologies.">
+    <meta name="theme-color" content="#FFFFFF">
+    <title>OruShops - Smart POS for Indian Retailers | Easyio Technologies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand': {
+                            'bg': '#FFFFFF',
+                            'surface': '#F9FAFB',
+                            'surface-2': '#F3F4F6',
+                            'primary': '#2563EB',
+                            'primary-hover': '#1D4ED8',
+                            'accent': '#0EA5E9',
+                            'text': '#1F2937',
+                            'muted': '#6B7280',
+                        }
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'system-ui', 'sans-serif'],
+                        'plus': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                        'geist': ['Geist', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'fade-in-delay': 'fadeIn 0.6s ease-out 0.2s forwards',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #FFFFFF; color: #1F2937; }
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-weight: 700; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+
+        /* Smooth transitions */
+        a, button { transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* Utility animations */
+        .animate-on-scroll.visible { animation: slideUp 0.6s ease-out forwards; }
+
+        /* Premium gradients */
+        .gradient-primary { background: linear-gradient(135deg, #2563EB 0%, #0EA5E9 100%); }
+        .gradient-subtle { background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%); }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <a href="#" class="logo" aria-label="RetailDost Home">
-                <span>RetailDost</span>
-            </a>
-            <nav id="nav-menu" aria-label="Main navigation">
-                <a href="#features">Features</a>
-                <a href="#personas">For Whom</a>
-                <a href="#cta">Download</a>
-                <a href="privacy_policy.html" target="_blank" rel="noopener noreferrer">Privacy</a>
-            </nav>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+<body class="bg-white">
+
+<!-- NAVBAR -->
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
+    <div class="container py-4 flex items-center justify-between">
+        <a href="https://www.easyio.tech" class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg gradient-primary"></div>
+            <span class="text-xl font-bold text-gray-900">OruShops</span>
+        </a>
+
+        <div id="nav-menu" class="hidden md:flex gap-8 items-center">
+            <a href="#features" class="text-gray-600 hover:text-gray-900 font-medium">Features</a>
+            <a href="#showcase" class="text-gray-600 hover:text-gray-900 font-medium">Product</a>
+            <a href="#testimonials" class="text-gray-600 hover:text-gray-900 font-medium">Reviews</a>
+            <a href="#pricing" class="text-gray-600 hover:text-gray-900 font-medium">Pricing</a>
+            <a href="#faq" class="text-gray-600 hover:text-gray-900 font-medium">FAQ</a>
+        </div>
+
+        <div class="flex gap-3 items-center">
+            <button class="hidden md:inline-flex px-6 py-2.5 rounded-xl font-semibold gradient-primary text-white hover:shadow-lg hover:shadow-blue-500/20 transform hover:-translate-y-0.5">
+                Get Started
             </button>
-        </div>
-    </header>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div>
-                    <h1>Smarter POS for <span class="highlight">Indian Retail</span></h1>
-                    <p class="hero-desc">Offline-first billing, Khata ledger, and inventory management—built for kirana stores, groceries, and small retailers who need reliability without complexity.</p>
-                    <div class="hero-buttons">
-                        <button class="btn-primary" onclick="handleDownload(event)" aria-label="Download RetailDost from Google Play">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
-                            </svg>
-                            Get on Google Play
-                        </button>
-                        <button class="btn-secondary" onclick="scrollToSection('cta')" aria-label="Learn more about RetailDost">
-                            Learn More
-                        </button>
-                    </div>
-                </div>
-                <div class="hero-visual" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="120" height="120" stroke="currentColor" fill="none" stroke-width="1.5">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/>
-                        <path d="M3 9h18M9 9v12M15 12v9"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-value">2M+</div>
-                    <div class="stat-label">Transactions/Month</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">100+</div>
-                    <div class="stat-label">Happy Retailers</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">99.9%</div>
-                    <div class="stat-label">Uptime</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="features">
-        <div class="container">
-            <h2>Powerful Features Built for You</h2>
-            <p class="section-subtitle">Everything you need to manage your shop efficiently</p>
-            <div class="features-grid">
-                <div class="feature-card" tabindex="0">
-                    <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 3h12c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z"/>
-                        <path d="M9 11h6M9 15h6"/>
-                    </svg>
-                    <h3>Lightning-Fast Billing</h3>
-                    <p>Scan barcodes in seconds, build carts intuitively, and print receipts instantly. Process more customers faster than ever.</p>
-                </div>
-                <div class="feature-card" tabindex="0">
-                    <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M4 4h16v16H4z"/>
-                        <path d="M8 8v8M12 8v8M16 8v8"/>
-                    </svg>
-                    <h3>Digital Khata</h3>
-                    <p>Replace old ledgers with a modern credit book. Track customer dues, payments, and balances with zero confusion.</p>
-                </div>
-                <div class="feature-card" tabindex="0">
-                    <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 4h12c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <path d="M9 9h6M9 14h6"/>
-                    </svg>
-                    <h3>Smart Inventory</h3>
-                    <p>Low stock alerts, expiry tracking, and batch management. Keep products organized and never oversell again.</p>
-                </div>
-                <div class="feature-card" tabindex="0">
-                    <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/>
-                        <path d="M3 9h18M9 9v12M15 12v9"/>
-                    </svg>
-                    <h3>Real-Time Analytics</h3>
-                    <p>See daily and weekly sales charts, top products, and profit margins. Make data-driven decisions instantly.</p>
-                </div>
-                <div class="feature-card" tabindex="0">
-                    <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 1v10M6 7h12c1.1 0 2 .9 2 2v11c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2z"/>
-                    </svg>
-                    <h3>Works Offline</h3>
-                    <p>No internet? No problem. Your data stays safe locally and syncs when you're back online.</p>
-                </div>
-                <div class="feature-card" tabindex="0">
-                    <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M20 7l-8-4-8 4v10c0 4.4 3.6 8 8 8s8-3.6 8-8V7z"/>
-                        <path d="M12 11v6M12 11l3 2M12 11l-3 2"/>
-                    </svg>
-                    <h3>Cloud Backup</h3>
-                    <p>Automatic sync across devices and cloud backup ensure you never lose critical business data.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="personas">
-        <div class="container">
-            <h2 style="color: white;">Built for Every Retail Store</h2>
-            <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">Whether kirana, grocery, pharmacy, or electronics—we've got you covered.</p>
-            <div class="personas-grid">
-                <div class="persona-card" tabindex="0">
-                    <svg class="persona-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M9 2l-1 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-4l-1-2H9z"/>
-                        <circle cx="12" cy="13" r="3.5"/>
-                    </svg>
-                    <p>Kirana Stores</p>
-                </div>
-                <div class="persona-card" tabindex="0">
-                    <svg class="persona-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M7 2h10c.55 0 1 .45 1 1v2c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1z"/>
-                        <path d="M5 5h14v15c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2V5z"/>
-                        <path d="M9 9h6M9 13h6M9 17h6"/>
-                    </svg>
-                    <p>Grocery Shops</p>
-                </div>
-                <div class="persona-card" tabindex="0">
-                    <svg class="persona-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 2c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4zm0 9c-3.3 0-6 1.3-6 3v2h12v-2c0-1.7-2.7-3-6-3z"/>
-                        <circle cx="12" cy="5" r="2"/>
-                    </svg>
-                    <p>Pharmacies</p>
-                </div>
-                <div class="persona-card" tabindex="0">
-                    <svg class="persona-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M8 13h-2v8c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2v-8z"/>
-                        <path d="M18 13h-4v8c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2v-8z"/>
-                    </svg>
-                    <p>Electronics Shops</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="trust">
-        <div class="container">
-            <div class="trust-section">
-                <div class="trust-content">
-                    <p>Trusted by retail shops across India</p>
-                    <div class="trust-logos">
-                        <div class="logo-item">📱 100+ Stores</div>
-                        <div class="logo-item">⭐ 4.8/5 Rating</div>
-                        <div class="logo-item">🚀 2+ Years Active</div>
-                        <div class="logo-item">💼 Multi-State</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="testimonials">
-        <div class="container">
-            <h2>What Retailers Say</h2>
-            <p class="section-subtitle">Real feedback from real users who've transformed their shops</p>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">"RetailDost completely changed how I manage my kirana store. Billing is lightning-fast and the digital Khata has saved me hours."</p>
-                    <div class="testimonial-author">
-                        <div class="author-name">Rajesh Kumar</div>
-                        <div class="author-role">Kirana Store Owner, Delhi</div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">"The inventory tracking is amazing. I no longer worry about stockouts or expired products. My profits have increased by 15%."</p>
-                    <div class="testimonial-author">
-                        <div class="author-name">Priya Singh</div>
-                        <div class="author-role">Grocery Store Owner, Mumbai</div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">"Works even without internet! This is crucial for my electronics shop. The offline-first design is brilliant."</p>
-                    <div class="testimonial-author">
-                        <div class="author-name">Amit Patel</div>
-                        <div class="author-role">Electronics Retailer, Bangalore</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="screenshots">
-        <div class="container">
-            <h2>See RetailDost in Action</h2>
-            <p class="section-subtitle">Clean, intuitive interface designed for speed and simplicity</p>
-            <div class="screenshots-grid">
-                <div class="screenshot-card">
-                    <svg viewBox="0 0 300 540" aria-hidden="true">
-                        <rect x="20" y="20" width="260" height="500" rx="20" fill="#1a2332" stroke="#6366f1" stroke-width="2"/>
-                        <rect x="40" y="40" width="220" height="460" fill="#0b1020"/>
-                        <text x="150" y="100" text-anchor="middle" fill="#6366f1" font-size="18" font-weight="bold">Billing Screen</text>
-                        <rect x="40" y="120" width="220" height="40" fill="#6366f1" opacity="0.2" rx="8"/>
-                        <text x="150" y="150" text-anchor="middle" fill="#ccc" font-size="12">Quick billing interface</text>
-                    </svg>
-                    <div class="screenshot-overlay">
-                        <span class="screenshot-label">Fast Billing</span>
-                    </div>
-                </div>
-                <div class="screenshot-card">
-                    <svg viewBox="0 0 300 540" aria-hidden="true">
-                        <rect x="20" y="20" width="260" height="500" rx="20" fill="#1a2332" stroke="#6366f1" stroke-width="2"/>
-                        <rect x="40" y="40" width="220" height="460" fill="#0b1020"/>
-                        <text x="150" y="100" text-anchor="middle" fill="#06b6d4" font-size="18" font-weight="bold">Inventory Tracker</text>
-                        <rect x="40" y="120" width="220" height="40" fill="#06b6d4" opacity="0.2" rx="8"/>
-                        <text x="150" y="150" text-anchor="middle" fill="#ccc" font-size="12">Real-time stock updates</text>
-                    </svg>
-                    <div class="screenshot-overlay">
-                        <span class="screenshot-label">Smart Inventory</span>
-                    </div>
-                </div>
-                <div class="screenshot-card">
-                    <svg viewBox="0 0 300 540" aria-hidden="true">
-                        <rect x="20" y="20" width="260" height="500" rx="20" fill="#1a2332" stroke="#6366f1" stroke-width="2"/>
-                        <rect x="40" y="40" width="220" height="460" fill="#0b1020"/>
-                        <text x="150" y="100" text-anchor="middle" fill="#8b5cf6" font-size="18" font-weight="bold">Digital Khata</text>
-                        <rect x="40" y="120" width="220" height="40" fill="#8b5cf6" opacity="0.2" rx="8"/>
-                        <text x="150" y="150" text-anchor="middle" fill="#ccc" font-size="12">Customer credit tracking</text>
-                    </svg>
-                    <div class="screenshot-overlay">
-                        <span class="screenshot-label">Digital Khata</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing">
-        <div class="container">
-            <h2>Simple, Transparent Pricing</h2>
-            <p class="section-subtitle">Pay only for what you use. No hidden charges.</p>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Starter</h3>
-                    <div class="price">₹99<span class="price-period">/month</span></div>
-                    <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">Perfect for small shops just getting started</p>
-                    <ul class="features-list">
-                        <li>Up to 500 transactions/month</li>
-                        <li>Basic billing</li>
-                        <li>Single user account</li>
-                        <li>Email support</li>
-                    </ul>
-                    <button class="btn-outline" onclick="handleDownload(event)" style="width: 100%; margin-top: var(--space-lg);">Get Started</button>
-                </div>
-                <div class="pricing-card featured">
-                    <h3>Professional</h3>
-                    <div class="price">₹499<span class="price-period">/month</span></div>
-                    <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">Best for growing retail operations</p>
-                    <ul class="features-list">
-                        <li>Unlimited transactions</li>
-                        <li>Digital Khata + Inventory</li>
-                        <li>Up to 5 user accounts</li>
-                        <li>Cloud backup included</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <button class="btn-primary" onclick="handleDownload(event)" style="width: 100%; margin-top: var(--space-lg);">Start Free Trial</button>
-                </div>
-                <div class="pricing-card">
-                    <h3>Enterprise</h3>
-                    <div class="price">Custom<span class="price-period">/month</span></div>
-                    <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">For multi-store chains and enterprises</p>
-                    <ul class="features-list">
-                        <li>Unlimited everything</li>
-                        <li>Advanced analytics</li>
-                        <li>Unlimited staff accounts</li>
-                        <li>Custom integrations</li>
-                        <li>Dedicated support</li>
-                    </ul>
-                    <button class="btn-outline" onclick="scrollToSection('contact')" style="width: 100%; margin-top: var(--space-lg);">Contact Sales</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="faq">
-        <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            <p class="section-subtitle">Everything you need to know about RetailDost</p>
-            <div class="faq-grid">
-                <details class="faq-item">
-                    <summary>Is my data safe with RetailDost?</summary>
-                    <p>Yes. Your data is encrypted locally on your device first, then securely synced to our servers only when you're online. We never share or sell your data.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>What if my internet goes down?</summary>
-                    <p>RetailDost is designed for offline-first operation. You can continue billing, tracking inventory, and managing your Khata even without internet. Changes sync automatically once you're back online.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Can I use RetailDost on multiple devices?</summary>
-                    <p>Yes! Your account can be used on multiple Android phones or tablets. Data syncs seamlessly across all your devices in real-time.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>How do I export my data?</summary>
-                    <p>You can export sales reports, inventory lists, and Khata details as PDF or CSV files directly from the app. This data belongs to you.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Is there a free trial?</summary>
-                    <p>Yes! The Professional plan comes with a 30-day free trial. No credit card required to get started.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>What devices does RetailDost support?</summary>
-                    <p>RetailDost works on Android 8.0 and above. We're building iOS support for late 2026. Minimum device specs: 2GB RAM, 100MB storage.</p>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <section id="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat card-sm">
-                    <div class="stat-value">100+</div>
-                    <div class="stat-label">Active Retailers</div>
-                </div>
-                <div class="stat card-sm">
-                    <div class="stat-value">₹2Cr+</div>
-                    <div class="stat-label">Transactions Processed</div>
-                </div>
-                <div class="stat card-sm">
-                    <div class="stat-value">4.8/5</div>
-                    <div class="stat-label">Average Rating</div>
-                </div>
-                <div class="stat card-sm">
-                    <div class="stat-value">24/7</div>
-                    <div class="stat-label">Support Available</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="cta">
-        <div class="container">
-            <h2>Ready to Transform Your Shop?</h2>
-            <p class="cta-description">Join hundreds of retailers already using RetailDost to simplify operations and grow revenue.</p>
-            <button class="btn-primary" style="background: var(--navy); color: var(--accent);" onclick="handleDownload(event)" aria-label="Download RetailDost Now">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
-                Download RetailDost Now
             </button>
         </div>
-    </section>
+    </div>
+</nav>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-social">
-                    <a href="https://twitter.com" class="social-icon" aria-label="Follow us on Twitter" target="_blank" rel="noopener noreferrer">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 7-1 7-4.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-                        </svg>
-                    </a>
-                    <a href="https://linkedin.com" class="social-icon" aria-label="Connect with us on LinkedIn" target="_blank" rel="noopener noreferrer">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
-                            <circle cx="4" cy="4" r="2"></circle>
-                        </svg>
-                    </a>
-                    <a href="https://instagram.com" class="social-icon" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
-                            <circle cx="17.5" cy="6.5" r="1.5"></circle>
-                        </svg>
-                    </a>
-                    <a href="https://youtube.com" class="social-icon" aria-label="Subscribe on YouTube" target="_blank" rel="noopener noreferrer">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.54c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33zM9.75 15.02V8.98l5.92 3.03L9.75 15.02z"></path>
-                        </svg>
-                    </a>
+<!-- ANNOUNCEMENT BAR -->
+<div class="bg-blue-50 border-b border-blue-100 py-3">
+    <div class="container text-center text-sm text-blue-900 font-medium">
+        <svg class="w-5 h-5 inline-block mr-2" fill="#2563EB" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"></path></svg>
+        OruShops by OruStudio is now available in 15 Indian states. <a href="https://www.easyio.tech" class="underline hover:no-underline">Learn more
+        <svg class="w-4 h-4 inline-block ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+    </div>
+</div>
+
+<!-- HERO SECTION -->
+<section class="py-20 md:py-32 bg-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-40">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-cyan-100 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div class="space-y-6 animate-on-scroll">
+                <div class="inline-block px-3 py-1 rounded-full bg-blue-50 border border-blue-200">
+                    <svg class="w-4 h-4 inline-block mr-2" fill="#2563EB" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg><span class="text-sm font-semibold text-blue-700">Trusted by 10,000+ retailers</span>
                 </div>
-                <div class="footer-links">
-                    <a href="privacy_policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-                    <a href="terms_of_service.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>
-                    <a href="mailto:easyio.tech@gmail.com">Contact</a>
+
+                <h1 class="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
+                    Smart POS for <span class="gradient-primary bg-clip-text text-transparent">Modern Indian Retail</span>
+                </h1>
+
+                <p class="text-xl text-gray-600 leading-relaxed max-w-lg">
+                    Offline-first billing, digital khata, and inventory management built for kirana stores, groceries, and retailers who demand reliability without complexity.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button class="px-8 py-3.5 rounded-xl font-semibold gradient-primary text-white hover:shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1">
+                        Download App
+                    </button>
+                    <button class="px-8 py-3.5 rounded-xl font-semibold border-2 border-gray-200 text-gray-900 hover:border-gray-300 hover:bg-gray-50">
+                        Schedule Demo
+                    </button>
                 </div>
             </div>
-            <p class="footer-copyright">© 2026 OruShops. All rights reserved. | RetailDost - Retail POS System</p>
-        </div>
-    </footer>
 
-    <script src="script.js"></script>
+            <div class="relative h-96 md:h-full animate-on-scroll" style="animation-delay: 0.2s;">
+                <div class="absolute inset-0 gradient-primary opacity-5 rounded-3xl"></div>
+                <div class="absolute inset-4 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-2xl border border-blue-200 flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="w-20 h-20 rounded-2xl gradient-primary mx-auto mb-4 flex items-center justify-center">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                            </svg>
+                        </div>
+                        <p class="text-gray-700 font-semibold">Dashboard Preview</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="grid grid-cols-3 gap-8 pt-12 border-t border-gray-200">
+            <div class="text-center animate-on-scroll" style="animation-delay: 0.3s;">
+                <div class="text-4xl font-bold text-blue-600 mb-2">2M+</div>
+                <p class="text-gray-600 font-medium">Transactions Monthly</p>
+            </div>
+            <div class="text-center animate-on-scroll" style="animation-delay: 0.4s;">
+                <div class="text-4xl font-bold text-blue-600 mb-2">99.9%</div>
+                <p class="text-gray-600 font-medium">Platform Uptime</p>
+            </div>
+            <div class="text-center animate-on-scroll" style="animation-delay: 0.5s;">
+                <div class="text-4xl font-bold text-blue-600 mb-2">24/7</div>
+                <p class="text-gray-600 font-medium">Support</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TRUSTED RETAILERS -->
+<section class="py-16 md:py-20 bg-gray-50 border-y border-gray-200">
+    <div class="container">
+        <p class="text-center text-gray-600 font-medium mb-12">Trusted by retailers across India</p>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center">
+            <div class="h-12 bg-gray-300 rounded-lg flex items-center justify-center text-gray-500 font-semibold">Big Bazaar</div>
+            <div class="h-12 bg-gray-300 rounded-lg flex items-center justify-center text-gray-500 font-semibold">Dmart</div>
+            <div class="h-12 bg-gray-300 rounded-lg flex items-center justify-center text-gray-500 font-semibold">Local Kirana</div>
+            <div class="h-12 bg-gray-300 rounded-lg flex items-center justify-center text-gray-500 font-semibold">Supermart</div>
+            <div class="h-12 bg-gray-300 rounded-lg flex items-center justify-center text-gray-500 font-semibold">Retail+</div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section id="features" class="py-20 md:py-28 bg-white">
+    <div class="container">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Everything You Need</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Powerful features designed specifically for Indian retail shops</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all group animate-on-scroll">
+                <div class="w-12 h-12 rounded-xl gradient-primary text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-gray-900 mb-2">Lightning Billing</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Process invoices in seconds. Barcode scanning, instant receipts, and smart cart management.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all group animate-on-scroll" style="animation-delay: 0.1s;">
+                <div class="w-12 h-12 rounded-xl gradient-primary text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-gray-900 mb-2">Digital Khata</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Modern credit ledger replaces old notebooks. Track dues, payments, and balances instantly.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all group animate-on-scroll" style="animation-delay: 0.2s;">
+                <div class="w-12 h-12 rounded-xl gradient-primary text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-gray-900 mb-2">Inventory Master</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Real-time stock tracking, smart reordering alerts, and supplier management in one place.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all group animate-on-scroll" style="animation-delay: 0.3s;">
+                <div class="w-12 h-12 rounded-xl gradient-primary text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-gray-900 mb-2">Analytics & Insights</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Beautiful dashboards show sales trends, top products, and customer behavior in real-time.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all group animate-on-scroll" style="animation-delay: 0.4s;">
+                <div class="w-12 h-12 rounded-xl gradient-primary text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-gray-900 mb-2">Cloud Sync</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Seamless sync across devices. Your data is always safe and accessible anywhere.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all group animate-on-scroll" style="animation-delay: 0.5s;">
+                <div class="w-12 h-12 rounded-xl gradient-primary text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-gray-900 mb-2">GST Compliant</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Automatic GST calculations and compliant invoicing for hassle-free tax management.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all group animate-on-scroll" style="animation-delay: 0.6s;">
+                <div class="w-12 h-12 rounded-xl gradient-primary text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-gray-900 mb-2">Multi-Device</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Use on tablets, smartphones, or computers. Works offline and syncs when online.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all group animate-on-scroll" style="animation-delay: 0.7s;">
+                <div class="w-12 h-12 rounded-xl gradient-primary text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-gray-900 mb-2">24/7 Support</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Hindi and English support available round the clock to help your business grow.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCT SHOWCASE -->
+<section id="showcase" class="py-20 md:py-28 bg-gray-50">
+    <div class="container">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Your Complete Retail Platform</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">All the tools your shop needs, simplified into one beautiful app</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="group cursor-pointer p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50/50 transition-all animate-on-scroll">
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 rounded-xl gradient-primary text-white flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="white" viewBox="0 0 24 24"><path d="M20 8H4V6h16m0 10H4v-2h16m0 6H4v-2h16z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-2">Fast Checkout</h3>
+                            <p class="text-gray-600 text-sm">One-tap payments with multiple payment method support</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50/50 transition-all animate-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 rounded-xl gradient-primary text-white flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="white" viewBox="0 0 24 24"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-2">Real-Time Analytics</h3>
+                            <p class="text-gray-600 text-sm">View sales, inventory, and customer insights instantly</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50/50 transition-all animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 rounded-xl gradient-primary text-white flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="white" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-2">Bank-Level Security</h3>
+                            <p class="text-gray-600 text-sm">Enterprise encryption protecting your business data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative animate-on-scroll" style="animation-delay: 0.3s;">
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-br from-gray-100 to-gray-50 rounded-3xl border border-gray-200 p-8 text-center">
+                        <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl gradient-primary text-white mb-6">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.6 11.48l1.63-4.27L15 10.3zM19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5.04 15l-5.75-7.71h5.75v7.71z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Download OruShops</h3>
+                        <p class="text-gray-600 mb-8">Get the app on your phone and start selling instantly</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="https://www.easyio.tech" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition-colors font-semibold">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17.6 11.48l1.63-4.27L15 10.3zM19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5.04 15l-5.75-7.71h5.75v7.71z"/>
+                                </svg>
+                                Google Play
+                            </a>
+                            <a href="https://www.easyio.tech" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition-colors font-semibold">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M18.71 19.71L12.41 13.41.41 1.41c-.39-.39-1.02-.39-1.41 0s-.39 1.02 0 1.41l6.3 6.29L.41 15.41c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l11.99-12L23.15 23c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L18.71 19.71z"/>
+                                </svg>
+                                App Store
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                        <p class="text-sm text-gray-600 text-center">
+                            <span class="font-semibold text-gray-900">10,000+</span> retailers trust OruShops
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="py-20 md:py-28 bg-white">
+    <div class="container">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Why Choose OruShops</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Purpose-built for Indian retail. Not a generic solution.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="p-8 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all animate-on-scroll">
+                <div class="w-12 h-12 mb-4">
+                    <svg class="w-full h-full text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0m0 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z"></path></svg>
+                </div>
+                <h3 class="font-bold text-lg text-gray-900 mb-3">Built for India</h3>
+                <p class="text-gray-600 leading-relaxed">Hindi support, GST compliance, Indian payment methods, and locally relevant features.</p>
+            </div>
+
+            <div class="p-8 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all animate-on-scroll" style="animation-delay: 0.1s;">
+                <div class="w-12 h-12 mb-4">
+                    <svg class="w-full h-full text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2m-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"></path></svg>
+                </div>
+                <h3 class="font-bold text-lg text-gray-900 mb-3">Works Offline</h3>
+                <p class="text-gray-600 leading-relaxed">Intermittent internet? No problem. OruShops works perfectly even without connectivity.</p>
+            </div>
+
+            <div class="p-8 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all animate-on-scroll" style="animation-delay: 0.2s;">
+                <div class="w-12 h-12 mb-4">
+                    <svg class="w-full h-full text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"></path></svg>
+                </div>
+                <h3 class="font-bold text-lg text-gray-900 mb-3">Affordable Pricing</h3>
+                <p class="text-gray-600 leading-relaxed">No hidden fees. Transparent pricing designed for small and medium retailers.</p>
+            </div>
+
+            <div class="p-8 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all animate-on-scroll" style="animation-delay: 0.3s;">
+                <div class="w-12 h-12 mb-4">
+                    <svg class="w-full h-full text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82M12 3L1 9l11 6.18L23 9 12 3z"></path></svg>
+                </div>
+                <h3 class="font-bold text-lg text-gray-900 mb-3">Easy to Learn</h3>
+                <p class="text-gray-600 leading-relaxed">Simple interface that anyone can use. Minimal training required to get started.</p>
+            </div>
+
+            <div class="p-8 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all animate-on-scroll" style="animation-delay: 0.4s;">
+                <div class="w-12 h-12 mb-4">
+                    <svg class="w-full h-full text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M16.5 12c1.38 0 2.49-1.12 2.49-2.5S17.88 7 16.5 7 14 8.12 14 9.5s1.12 2.5 2.5 2.5zM9 11c1.66 0 2.99-1.34 2.99-3S10.66 5 9 5C7.34 5 6 6.34 6 8s1.34 3 3 3zm7.5 3c-1.83 0-5.5.92-5.5 2.75V19h11v-2.25c0-1.83-3.67-2.75-5.5-2.75zM9 13c-2.33 0-7 1.17-7 3.5V19h6v-2.25c0-.85.33-2.34 2.37-3.47.06-.03.13-.05.19-.08C10.45 13.13 9.71 13 9 13z"></path></svg>
+                </div>
+                <h3 class="font-bold text-lg text-gray-900 mb-3">1-on-1 Support</h3>
+                <p class="text-gray-600 leading-relaxed">Dedicated support team in Hindi and English available 24/7 for your needs.</p>
+            </div>
+
+            <div class="p-8 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all animate-on-scroll" style="animation-delay: 0.5s;">
+                <div class="w-12 h-12 mb-4">
+                    <svg class="w-full h-full text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M7.5 13c1.93 0 3.5-1.57 3.5-3.5S9.43 6 7.5 6 4 7.57 4 9.5 5.57 13 7.5 13zm9.5-1c1.66 0 2.99-1.34 2.99-3S18.66 6 17 6s-3 1.34-3 3 1.34 3 3 3zm0 4c-2.33 0-7 1.17-7 3.5V19h14v-2.25c0-2.33-4.67-3.5-7-3.5zM7.5 15c-2.33 0-7 1.17-7 3.5V19h7v-2.25c0-.85.33-2.34 2.37-3.47-.59-.33-1.37-.53-2.37-.53z"></path></svg>
+                </div>
+                <h3 class="font-bold text-lg text-gray-900 mb-3">Always Growing</h3>
+                <p class="text-gray-600 leading-relaxed">Regular updates and new features based on feedback from thousands of retailers.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="py-20 md:py-28 bg-gray-50">
+    <div class="container">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Loved by Retailers</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Real reviews from real business owners</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="p-8 rounded-2xl bg-white border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all animate-on-scroll">
+                <div class="flex gap-1 mb-4">
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                </div>
+                <p class="text-gray-700 leading-relaxed mb-6">"OruShops has transformed how I manage my grocery store. The digital khata alone saves me 2 hours daily. Highly recommended!"</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-primary"></div>
+                    <div>
+                        <p class="font-bold text-gray-900">Rajesh Kumar</p>
+                        <p class="text-sm text-gray-600">Grocery Store Owner</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-8 rounded-2xl bg-white border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all animate-on-scroll" style="animation-delay: 0.1s;">
+                <div class="flex gap-1 mb-4">
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                </div>
+                <p class="text-gray-700 leading-relaxed mb-6">"The offline functionality is a lifesaver in our area. No more lost sales due to internet issues. Best investment for my shop!"</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-primary"></div>
+                    <div>
+                        <p class="font-bold text-gray-900">Priya Sharma</p>
+                        <p class="text-sm text-gray-600">Kirana Store Operator</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-8 rounded-2xl bg-white border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 transition-all animate-on-scroll" style="animation-delay: 0.2s;">
+                <div class="flex gap-1 mb-4">
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                    <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                </div>
+                <p class="text-gray-700 leading-relaxed mb-6">"Great support team! They helped me set up everything and I was running billing in 10 minutes. Can't ask for better service!"</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-primary"></div>
+                    <div>
+                        <p class="font-bold text-gray-900">Amit Patel</p>
+                        <p class="text-sm text-gray-600">Multi-Store Owner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING SECTION -->
+<section id="pricing" class="py-20 md:py-28 bg-white">
+    <div class="container">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Simple, Transparent Pricing</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Choose the plan that works best for your business</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Starter -->
+            <div class="p-8 rounded-2xl border-2 border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all animate-on-scroll">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Starter</h3>
+                <p class="text-gray-600 mb-6">Perfect for solo retailers</p>
+                <div class="mb-6">
+                    <span class="text-4xl font-bold text-gray-900">₹499</span>
+                    <span class="text-gray-600">/month</span>
+                </div>
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-center gap-3 text-gray-700">
+                        <svg class="w-5 h-5 text-green-500 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        Basic billing
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-700">
+                        <svg class="w-5 h-5 text-green-500 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        5 products max
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-700">
+                        <svg class="w-5 h-5 text-green-500 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        Email support
+                    </li>
+                </ul>
+                <button class="w-full py-3 rounded-xl border-2 border-gray-200 text-gray-900 font-semibold hover:border-gray-300 hover:bg-gray-50">
+                    Start Free Trial
+                </button>
+            </div>
+
+            <!-- Professional (Featured) -->
+            <div class="p-8 rounded-2xl border-2 border-blue-500 bg-blue-50/50 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 animate-on-scroll" style="animation-delay: 0.1s;">
+                <div class="inline-block px-3 py-1 rounded-full bg-blue-500 text-white text-xs font-bold mb-4">
+                    MOST POPULAR
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Professional</h3>
+                <p class="text-gray-600 mb-6">Best for growing stores</p>
+                <div class="mb-6">
+                    <span class="text-4xl font-bold text-gray-900">₹999</span>
+                    <span class="text-gray-600">/month</span>
+                </div>
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-center gap-3 text-gray-700">
+                        <svg class="w-5 h-5 text-green-500 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        Unlimited products
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-700">
+                        <svg class="w-5 h-5 text-green-500 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        Digital khata
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-700">
+                        <svg class="w-5 h-5 text-green-500 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        Analytics dashboard
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-700">
+                        <svg class="w-5 h-5 text-green-500 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        Priority support
+                    </li>
+                </ul>
+                <button class="w-full py-3 rounded-xl gradient-primary text-white font-semibold hover:shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1">
+                    Start Free Trial
+                </button>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="p-8 rounded-2xl border-2 border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all animate-on-scroll" style="animation-delay: 0.2s;">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Enterprise</h3>
+                <p class="text-gray-600 mb-6">For multi-store chains</p>
+                <div class="mb-6">
+                    <span class="text-4xl font-bold text-gray-900">Custom</span>
+                </div>
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-center gap-3 text-gray-700">
+                        <svg class="w-5 h-5 text-green-500 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        Everything in Pro
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-700">
+                        <svg class="w-5 h-5 text-green-500 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        Multi-store management
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-700">
+                        <svg class="w-5 h-5 text-green-500 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        Custom integrations
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-700">
+                        <svg class="w-5 h-5 text-green-500 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        Dedicated account manager
+                    </li>
+                </ul>
+                <button class="w-full py-3 rounded-xl border-2 border-gray-200 text-gray-900 font-semibold hover:border-gray-300 hover:bg-gray-50">
+                    Contact Sales
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section id="faq" class="py-20 md:py-28 bg-gray-50">
+    <div class="container">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Everything you need to know about OruShops</p>
+        </div>
+
+        <div class="max-w-2xl mx-auto space-y-4">
+            <details class="group p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50/30 transition-all animate-on-scroll" open>
+                <summary class="flex items-center justify-between cursor-pointer font-bold text-gray-900 text-lg">
+                    Is there a free trial?
+                    <span class="text-2xl group-open:rotate-180 transition-transform">+</span>
+                </summary>
+                <p class="text-gray-600 mt-4 leading-relaxed">Yes! All plans come with a 14-day free trial. No credit card required. Try all features risk-free.</p>
+            </details>
+
+            <details class="group p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50/30 transition-all animate-on-scroll" style="animation-delay: 0.1s;">
+                <summary class="flex items-center justify-between cursor-pointer font-bold text-gray-900 text-lg">
+                    What about my data when I cancel?
+                    <span class="text-2xl group-open:rotate-180 transition-transform">+</span>
+                </summary>
+                <p class="text-gray-600 mt-4 leading-relaxed">Your data is yours. If you cancel, we'll give you a full backup in standard formats so you can migrate anytime.</p>
+            </details>
+
+            <details class="group p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50/30 transition-all animate-on-scroll" style="animation-delay: 0.2s;">
+                <summary class="flex items-center justify-between cursor-pointer font-bold text-gray-900 text-lg">
+                    Does it work offline?
+                    <span class="text-2xl group-open:rotate-180 transition-transform">+</span>
+                </summary>
+                <p class="text-gray-600 mt-4 leading-relaxed">Absolutely! OruShops works perfectly offline. Your data syncs automatically when connectivity is restored.</p>
+            </details>
+
+            <details class="group p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50/30 transition-all animate-on-scroll" style="animation-delay: 0.3s;">
+                <summary class="flex items-center justify-between cursor-pointer font-bold text-gray-900 text-lg">
+                    Do you offer bulk discounts?
+                    <span class="text-2xl group-open:rotate-180 transition-transform">+</span>
+                </summary>
+                <p class="text-gray-600 mt-4 leading-relaxed">Yes! For chains with 5+ stores, we offer significant discounts. Contact our sales team for custom pricing.</p>
+            </details>
+
+            <details class="group p-6 rounded-2xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50/30 transition-all animate-on-scroll" style="animation-delay: 0.4s;">
+                <summary class="flex items-center justify-between cursor-pointer font-bold text-gray-900 text-lg">
+                    How is my data secured?
+                    <span class="text-2xl group-open:rotate-180 transition-transform">+</span>
+                </summary>
+                <p class="text-gray-600 mt-4 leading-relaxed">We use bank-level encryption (256-bit SSL/TLS), regular security audits, and comply with GDPR and Indian data protection laws.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA BANNER -->
+<section class="py-16 md:py-24 bg-gradient-to-r from-blue-600 to-cyan-600 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container relative z-10 text-center text-white">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Ready to Transform Your Retail Business?</h2>
+        <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">Join 10,000+ retailers already using OruShops to grow their business.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button class="px-8 py-4 rounded-xl font-bold bg-white text-blue-600 hover:shadow-xl hover:shadow-blue-500/30 transform hover:-translate-y-1 transition-all">
+                Download OruShops
+            </button>
+            <button class="px-8 py-4 rounded-xl font-bold border-2 border-white text-white hover:bg-white/10">
+                Schedule a Demo
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-gray-400 py-16">
+    <div class="container">
+        <div class="grid md:grid-cols-5 gap-8 mb-12">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-8 h-8 rounded-lg gradient-primary"></div>
+                    <span class="text-white font-bold">OruShops</span>
+                </div>
+                <p class="text-sm">Smart POS for modern Indian retail. By OruStudio, from Easyio Technologies.</p>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-white mb-4">Product</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition">Features</a></li>
+                    <li><a href="#" class="hover:text-white transition">Pricing</a></li>
+                    <li><a href="#" class="hover:text-white transition">Security</a></li>
+                    <li><a href="#" class="hover:text-white transition">Roadmap</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-white mb-4">Company</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                    <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                    <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                    <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-white mb-4">Legal</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition">Privacy</a></li>
+                    <li><a href="#" class="hover:text-white transition">Terms</a></li>
+                    <li><a href="#" class="hover:text-white transition">Cookies</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-white mb-4">Follow</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition">Twitter</a></li>
+                    <li><a href="#" class="hover:text-white transition">LinkedIn</a></li>
+                    <li><a href="#" class="hover:text-white transition">Instagram</a></li>
+                    <li><a href="#" class="hover:text-white transition">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-800 pt-8">
+            <p class="text-center text-sm text-gray-500">© 2024 OruShops by OruStudio. Powered by Easyio Technologies. <a href="https://www.easyio.tech" class="hover:text-white transition">www.easyio.tech</a> | All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navMenu = document.getElementById('nav-menu');
+
+    mobileMenuBtn?.addEventListener('click', () => {
+        navMenu?.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when link clicked
+    navMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.add('hidden');
+        });
+    });
+
+    // Scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+</script>
+
 </body>
 </html>
