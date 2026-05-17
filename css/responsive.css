@@ -1,0 +1,283 @@
+/* Tablet (768px) */
+@media (max-width: 768px) {
+  :root {
+    --text-h1: 2.5rem;
+    --text-h2: 1.875rem;
+    --text-h4: 1.25rem;
+  }
+
+  h1 {
+    font-size: var(--text-h1);
+  }
+
+  h2 {
+    font-size: var(--text-h2);
+  }
+
+  section {
+    padding: var(--space-2xl) 0;
+  }
+
+  .hero {
+    padding: 4rem 0 2rem;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .hero-visual {
+    aspect-ratio: auto;
+    min-height: 300px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .personas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-card.featured {
+    transform: scale(1);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .screenshots-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0 var(--space-lg);
+  }
+
+  section > .container {
+    padding: 0;
+  }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+  :root {
+    --text-h1: 1.875rem;
+    --text-h2: 1.5rem;
+    --text-h4: 1.125rem;
+    --space-2xl: 2rem;
+    --space-3xl: 2.5rem;
+  }
+
+  header {
+    padding: var(--space-md) 0;
+  }
+
+  .hero {
+    padding: 2rem 0;
+  }
+
+  .hero h1 {
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-buttons {
+    gap: var(--space-md);
+  }
+
+  .btn {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-sm);
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+  }
+
+  .stat-value {
+    font-size: 2rem;
+  }
+
+  .personas-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .feature-card,
+  .persona-card,
+  .card {
+    padding: var(--space-lg);
+  }
+
+  .card-sm {
+    padding: var(--space-md);
+  }
+
+  .cta-section {
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+  }
+
+  .cta-description {
+    font-size: 1rem;
+  }
+
+  .pricing-grid {
+    gap: var(--space-lg);
+  }
+
+  .price {
+    font-size: 2.5rem;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-item summary {
+    padding: var(--space-md);
+  }
+
+  .faq-item p {
+    padding: var(--space-md);
+  }
+
+  .testimonial-card {
+    padding: var(--space-lg);
+  }
+
+  .testimonial-text {
+    font-size: 1rem;
+  }
+
+  .hero-visual {
+    min-height: 250px;
+  }
+
+  .container {
+    padding: 0 var(--space-lg);
+  }
+
+  section {
+    padding: var(--space-2xl) 0;
+  }
+
+  .divider {
+    margin: var(--space-lg) 0;
+  }
+
+  .hero-visual::before {
+    display: none;
+  }
+
+  .hero::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .social-links {
+    flex-wrap: wrap;
+  }
+
+  .stats-grid {
+    padding: var(--space-lg);
+    margin: var(--space-xl) 0;
+  }
+}
+
+/* Large screens (1440px+) */
+@media (min-width: 1440px) {
+  .container {
+    width: min(1400px, calc(100% - 4rem));
+    margin-inline: auto;
+  }
+
+  section > .container {
+    padding: 0 2rem;
+  }
+
+  .hero-content {
+    gap: 6rem;
+  }
+
+  .features-grid {
+    gap: var(--space-2xl);
+  }
+}
+
+/* Print */
+@media print {
+  header,
+  footer,
+  .nav-toggle,
+  .btn-secondary,
+  .social-links {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  section {
+    page-break-inside: avoid;
+  }
+}
